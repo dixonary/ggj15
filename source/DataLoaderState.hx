@@ -38,7 +38,6 @@ class DataLoaderState extends FlxState {
         // FlxG.sound.muteKeys = 
         // FlxG.sound.volumeDownKeys = 
         // FlxG.sound.volumeUpKeys = null;
-
     }
 
     //Called when levels are finished downloading

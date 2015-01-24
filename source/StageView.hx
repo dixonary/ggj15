@@ -8,7 +8,6 @@ import flixel.text.FlxText;
 using flixel.util.FlxSpriteUtil;
 
 class StageView extends FlxSpriteGroup {
-
 	private var whatNow:FlxText;	
 	private var choices:Array<ChoiceButton>;
 
@@ -36,17 +35,14 @@ class StageView extends FlxSpriteGroup {
 	override public function update():Void {
 		super.update();
 		whatNow.text = Reg.stages[stageNum].text; 
-	}	
+	}
 }
 
 class ChoiceButton extends FlxSprite {
-
 	function new(X:Float, Y:Float, Width:Float, Height:Float, 
 		         Id:Int, Link:Int, Text:String):Void {		
 		super(X, Y);
 
         makeGraphic(cast Width, cast Height, 0xff123456, true);
-
 	}
-
 }
