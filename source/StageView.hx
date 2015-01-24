@@ -34,7 +34,7 @@ class StageView extends FlxSpriteGroup {
 
 	override public function update():Void {
 		super.update();
-		whatNow.text = Reg.stages[stageNum].text; 
+		whatNow.text = "What do we do now, " + Reg.stages[stageNum].title; 
 	}
 }
 

@@ -41,7 +41,7 @@ class PlayState extends FlxState
 	override public function update():Void {
 		super.update();
 
-		worldName.text = Reg.stages[Reg.stage].prefix + Reg.world;
+		worldName.text = Reg.stages[Reg.stage].world;
 
 		if(FlxG.keys.pressed.N)
 			switchStage(0);

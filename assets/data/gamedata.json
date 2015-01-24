@@ -1,44 +1,49 @@
 [
 {
 	"id":0,
-	"prefix":"The land of ",
-	"text":"What should we do now, sir?",
+	"world":"The land of butts",
+	"title":"sir?",
 	""
 	"choices":
 		[
 		{
-			"text": "fjeiog",
+			"text": "Steal the Declaration of Independence",
 			"link": 1
 		},
         {
             "text": "fjeiog",
             "link": 2
-        },
-        {
-            "text": "fjeiog",
-            "link": 3
         }
 		]
 },
 {
     "id":1,
-    "prefix":"The land of ",
+    "world":"The land of butts",
     "text":"Choice 1",
-    ""
-    "choices":[]
+    "title":"choosy?",
+    "choices":
+        [
+        {
+            "text": "hi",
+            "link": 4
+        }
+        ]
 },
 {
     "id":2,
-    "prefix":"The land of ",
+    "world":"The land of butts",
     "text":"Choice 2",
-    ""
-    "choices":[]
+    "title":"choosy?",
+    "choices":[{
+        "text": "This is a dead end!",
+        "link": 2
+    }]
 },
 {
     "id":3,
-    "prefix":"The land of ",
+    "world":"The land of butts",
     "text":"Choice 3",
-    ""
+    "title":"choosy?",
     "choices":[]
 }
 ]

@@ -5,15 +5,13 @@ class Reg
 	// Globals
 	public static var stages:Array<Stage>;
 	public static var stage:Int;
-
-	public static var world:String = "Testplace";
 }
 
 typedef Stage = {
     var id:Int;
-    var prefix:String;
+    var world:String;
     var image:String;
-    var text:String;
+    var title:String;
     var choices:Array<Choice>;
 }
 

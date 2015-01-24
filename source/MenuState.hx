@@ -12,8 +12,6 @@ class MenuState extends FlxState
 		super.create();
 		FlxG.camera.antialiasing = true;
 
-        var btnscale = new FlxPoint(4,4);
-
         var play = new FlxButton(FlxG.width / 2, FlxG.height / 2 - 50, "Play",
                                  function() {
                                      FlxG.switchState(new PlayState());});
@@ -35,7 +33,7 @@ class MenuState extends FlxState
 	override public function update():Void {
 		super.update();
 
-        if(FlxG.keys.justPressed.Q)
+        if(FlxG.keys.justPressed.END)
 			Sys.exit(0);
 	}
 }
