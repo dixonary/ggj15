@@ -1,13 +1,15 @@
 [
 {
 	"id":0,
-	"text":"hfjksd",
+	"prefix":"The land of ",
+	"text":"What should we do now, sir?",
+	""
 	"choices":
 		[
 		{
 			"text": "fjeiog",
 			"link": 1
 		}
-		]		
+		]
 }
 ]
