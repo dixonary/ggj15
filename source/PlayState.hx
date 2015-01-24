@@ -48,6 +48,7 @@ class PlayState extends FlxState
 
 		if(FlxG.keys.justPressed.Q)
 			Sys.exit(0);
+		
 	}	
 
 	public function switchStage(NextStage:Int):Void {
@@ -68,7 +69,7 @@ class PlayState extends FlxState
 			    prevStage = null;
 			    moving = false;
 		    }});
-
+		//Delay, then bring in new stage 
 		new FlxTimer(1.5, function(_){
 			FlxTween.tween(currentStage, {y:0}, 1, 
 			{ease:FlxEase.quadInOut});
