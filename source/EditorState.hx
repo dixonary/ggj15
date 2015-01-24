@@ -11,9 +11,7 @@ class EditorState extends FlxState
 		super.create();
 		FlxG.camera.antialiasing = true;
 
-        for (stage in Reg.stages) {
-
-        }
+        add(new EditGraph(Reg.stages));
 	}
 	
 	override public function destroy():Void {

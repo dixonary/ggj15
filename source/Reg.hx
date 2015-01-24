@@ -10,14 +10,14 @@ class Reg
 }
 
 typedef Stage = {
-	var id:Int;
-	var prefix:String;
-	var image:String;
-	var text:String;
-	var choices:Array<Choice>;
+    var id:Int;
+    var prefix:String;
+    var image:String;
+    var text:String;
+    var choices:Array<Choice>;
 }
 
 typedef Choice = {
-	var text:String;
-	var link:Int;
+    var text:String;
+    var link:Int;
 }
