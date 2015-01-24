@@ -6,6 +6,7 @@ import flixel.text.FlxText;
 
 class PlayState extends FlxState
 {
+
 	private var worldName:FlxText;
 
 	override public function create():Void {
@@ -14,7 +15,9 @@ class PlayState extends FlxState
 
 		worldName = new FlxText(0,0,FlxG.width, "", 24);
 		add(worldName);
-		add(new StageView(0));
+		currentStage = new StageView(0);
+		stageViews.add(currentStage);
+
 	}
 	
 	override public function destroy():Void {
@@ -29,4 +32,6 @@ class PlayState extends FlxState
 		if(FlxG.keys.justPressed.Q)
 			Sys.exit(0);
 	}	
+
+
 }
