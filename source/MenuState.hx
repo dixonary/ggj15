@@ -18,7 +18,6 @@ class MenuState extends FlxState
             FlxG.width / 2, FlxG.height / 2 + 100, "Edit", function() {
                               FlxG.switchState(new EditorState()); }));
 
-        add(new StageEditPopup(Reg.stages[0]));
 	}
 	
     /*
