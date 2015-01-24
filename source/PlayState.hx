@@ -56,16 +56,16 @@ class PlayState extends FlxState
 		currentStage.y = FlxG.height;
 		moving = true;
 		FlxTween.tween(prevStage, {alpha:0}, 0.5, 
-					   {ease:FlxEase.quadInOut, 
-					   complete:function(_){
-						   prevStage.destroy();
-						   prevStage = null;
-						   moving = false;
-					   }});
+		    {ease:FlxEase.quadInOut, 
+		    complete:function(_){
+			    prevStage.destroy();
+			    prevStage = null;
+			    moving = false;
+		    }});
 		new FlxTimer(1.5, function(_){
-					 	FlxTween.tween(currentStage, {y:0}, 1, 
-					   		{ease:FlxEase.quadInOut});
-					});
+			FlxTween.tween(currentStage, {y:0}, 1, 
+			{ease:FlxEase.quadInOut});
+			});
 	}
 
 }
