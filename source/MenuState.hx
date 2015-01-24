@@ -4,6 +4,7 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flixel.util.FlxPoint;
 
 class MenuState extends FlxState
 {
@@ -11,14 +12,20 @@ class MenuState extends FlxState
 		super.create();
 		FlxG.camera.antialiasing = true;
 
-		add(new FlxButton(
-            FlxG.width / 2, FlxG.height / 2 - 100, "Play", function() { 
-                              FlxG.switchState(new PlayState());}));
-		add(new FlxButton(
-            FlxG.width / 2, FlxG.height / 2 + 100, "Edit", function() {
-                              FlxG.switchState(new EditorState()); }));
+        var btnscale = new FlxPoint(4,4);
+
+        var play = new FlxButton(FlxG.width / 2, FlxG.height / 2 - 50, "Play",
+                                 function() {
+                                     FlxG.switchState(new PlayState());});
+        play.scale.set(4,4);
+        var edit = new FlxButton(FlxG.width / 2, FlxG.height / 2 + 50, "Edit",
+                                 function() {
+                                     FlxG.switchState(new EditorState());});
+        edit.scale.set(4,4);
+		add(play);
+		add(edit);
 	}
-	
+
     /*
 	override public function destroy():Void {
 		super.destroy();
@@ -30,5 +37,5 @@ class MenuState extends FlxState
 
         if(FlxG.keys.justPressed.Q)
 			Sys.exit(0);
-	}	
+	}
 }
