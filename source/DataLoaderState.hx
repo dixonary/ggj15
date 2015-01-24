@@ -44,7 +44,6 @@ class DataLoaderState extends FlxState {
     //Called when levels are finished downloading
     public function doneLevels(e:flash.events.Event):Void {
         Reg.stages = haxe.Json.parse(e.target.data);
-        Reg.stage = Reg.stages[0];
 
         //If no level data exists, initialise as empty
         FlxG.switchState(new PlayState());

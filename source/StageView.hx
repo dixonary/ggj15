@@ -43,10 +43,13 @@ class ChoiceButton extends FlxSpriteGroup {
 
 	private var bg:FlxSprite;
 	private var label:FlxText;
+	private var link:Int;
 
 	function new(X:Float, Y:Float, Width:Float, Height:Float, 
 		         Id:Int, Link:Int, Text:String):Void {		
 		super(X, Y);
+
+		link = Link;
 
 		bg = new FlxSprite();
         bg.makeGraphic(cast Width, cast Height, 0x00123456, true);
@@ -58,6 +61,19 @@ class ChoiceButton extends FlxSpriteGroup {
         label.alignment = "center";
         add(label);
 
+	}
+
+	override public function update():Void {
+		super.update();
+
+		var mw = FlxG.mouse.getWorldPosition();
+		if(FlxG.mouse.justPressed) {
+			if(mw.x > x && mw.x < x+bg.width
+		       && mw.y > y && mw.y < y+bg.height) {
+				var state:PlayState = cast FlxG.state;
+				state.switchStage(link);
+			}
+		}
 	}
 
 }
