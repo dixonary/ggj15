@@ -26,7 +26,7 @@ class StageView extends FlxSpriteGroup {
 		var ch = Reg.stages[stageNum].choices;
 		for(i in 0 ... ch.length) {
 			var c = new ChoiceButton(
-				FlxG.height/2+i, FlxG.width/4, FlxG.height/8, FlxG.width/2, 
+				FlxG.width/4, FlxG.height/2+i*FlxG.height/8, FlxG.width/2,FlxG.height/9, 
 				i, ch[i].link, ch[i].text);
 			choices.push(c);
 			add(c);
@@ -45,7 +45,7 @@ class ChoiceButton extends FlxSprite {
 		         Id:Int, Link:Int, Text:String):Void {		
 		super(X, Y);
 
-        makeGraphic(cast Width, cast Height, 0x00ffffff, true);
+        makeGraphic(cast Width, cast Height, 0xff123456, true);
 
 	}
 
