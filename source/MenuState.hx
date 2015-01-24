@@ -17,6 +17,8 @@ class MenuState extends FlxState
 		add(new FlxButton(
             FlxG.width / 2, FlxG.height / 2 + 100, "Edit", function() {
                               FlxG.switchState(new EditorState()); }));
+
+        add(new StageEditPopup(Reg.stages[0]));
 	}
 	
     /*
@@ -28,7 +30,7 @@ class MenuState extends FlxState
 	override public function update():Void {
 		super.update();
 
-        if(FlxG.keys.justPressed.Q)
+        if(FlxG.keys.justPressed.END)
 			Sys.exit(0);
 	}	
 }
