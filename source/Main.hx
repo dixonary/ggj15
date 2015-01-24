@@ -10,15 +10,13 @@ import flixel.FlxState;
 
 class Main extends Sprite 
 {
-	var gameWidth:Int  = 640; // Width in pixels
-	var gameHeight:Int = 480; // Height in pixels
-	var initialState:Class<FlxState> = PlayState;
-	var zoom:Float = -1; 	  // If -1, zoom to fit
-	var framerate:Int = 60;   
-	var skipSplash:Bool = false; 	 
+	var gameWidth:Int  = 1280; // Width in pixels
+	var gameHeight:Int = 720; // Height in pixels
+	var zoom:Float 	   = -1;  // If -1, zoom to fit
+	var framerate:Int  = 60;   
+	var skipSplash:Bool 	 = false; 	 
 	var startFullscreen:Bool = false; 
-	
-	// You can pretty much ignore everything from here on - your code should go in your states.
+	var initialState:Class<FlxState> = PlayState;
 	
 	public static function main():Void {	
 		Lib.current.addChild(new Main());
@@ -47,10 +45,10 @@ class Main extends Sprite
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
 		if (zoom == -1) {
-			var ratioX:Float = stageWidth / gameWidth;
+			var ratioX:Float = stageWidth  / gameWidth;
 			var ratioY:Float = stageHeight / gameHeight;
 			zoom = Math.min(ratioX, ratioY);
-			gameWidth = Math.ceil(stageWidth / zoom);
+			gameWidth = Math.ceil(stageWidth   / zoom);
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
