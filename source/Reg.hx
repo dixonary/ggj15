@@ -4,7 +4,7 @@ class Reg
 {
 	// Globals
 	public static var stages:Array<Stage>;
-	public static var stage:Stage;
+	public static var stage:Int;
 
 	public static var world:String = "Testplace";
 }

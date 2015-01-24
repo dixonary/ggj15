@@ -13,7 +13,7 @@ class MenuState extends FlxState
 
 		add(new FlxButton(
             FlxG.width / 2, FlxG.height / 2 - 100, "Play", function() { 
-                              FlxG.switchState(new DataLoaderState());}));
+                              FlxG.switchState(new PlayState());}));
 		add(new FlxButton(
             FlxG.width / 2, FlxG.height / 2 + 100, "Edit", function() {
                               FlxG.switchState(new EditorState()); }));

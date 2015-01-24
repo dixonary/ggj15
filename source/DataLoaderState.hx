@@ -13,6 +13,8 @@ import flash.events.IOErrorEvent;
  */
 class DataLoaderState extends FlxState {
 
+    var nextState:Class<FlxState> = MenuState;
+
     override public function create():Void {
         FlxG.camera.antialiasing = true;
 
@@ -30,8 +32,8 @@ class DataLoaderState extends FlxState {
 
         //Load in level data from external
         var loader = new flash.net.URLLoader();
-            loader.addEventListener(Event.COMPLETE, doneLevels);
-            loader.addEventListener(IOErrorEvent.IO_ERROR, fail);
+        loader.addEventListener(Event.COMPLETE, doneLevels);
+        loader.addEventListener(IOErrorEvent.IO_ERROR, fail);
         loader.load(new flash.net.URLRequest("assets/data/gamedata.json"));
 
         // //Disable sound tray
@@ -43,10 +45,9 @@ class DataLoaderState extends FlxState {
     //Called when levels are finished downloading
     public function doneLevels(e:flash.events.Event):Void {
         Reg.stages = haxe.Json.parse(e.target.data);
-        Reg.stage = Reg.stages[0];
 
         //If no level data exists, initialise as empty
-        FlxG.switchState(new PlayState());
+        FlxG.switchState(Type.createInstance(nextState,[]));
     }
 
     //Called when levels FAIL to download

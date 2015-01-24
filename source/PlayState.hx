@@ -26,7 +26,10 @@ class PlayState extends FlxState
 
 		worldName = new FlxText(0,0,FlxG.width, "", 24);
 		add(worldName);
-		currentStage = new StageView(0);
+
+		Reg.stage = 0;
+
+		currentStage = new StageView(Reg.stage);
 		stageViews.add(currentStage);
 
 	}
@@ -38,7 +41,7 @@ class PlayState extends FlxState
 	override public function update():Void {
 		super.update();
 
-		worldName.text = Reg.stage.prefix + Reg.world;
+		worldName.text = Reg.stages[Reg.stage].prefix + Reg.world;
 
 		if(FlxG.keys.pressed.N)
 			switchStage(0);
@@ -50,22 +53,26 @@ class PlayState extends FlxState
 	public function switchStage(NextStage:Int):Void {
 		if(moving) return;
 
+		Reg.stage = NextStage;
 		prevStage = currentStage;
 		currentStage = new StageView(NextStage);
 		stageViews.add(currentStage);
 		currentStage.y = FlxG.height;
 		moving = true;
+		
+		//Fade out current stage
 		FlxTween.tween(prevStage, {alpha:0}, 0.5, 
-					   {ease:FlxEase.quadInOut, 
-					   complete:function(_){
-						   prevStage.destroy();
-						   prevStage = null;
-						   moving = false;
-					   }});
+		    {ease:FlxEase.quadInOut, 
+		    complete:function(_){
+			    prevStage.destroy();
+			    prevStage = null;
+			    moving = false;
+		    }});
+
 		new FlxTimer(1.5, function(_){
-					 	FlxTween.tween(currentStage, {y:0}, 1, 
-					   		{ease:FlxEase.quadInOut});
-					});
+			FlxTween.tween(currentStage, {y:0}, 1, 
+			{ease:FlxEase.quadInOut});
+			});
 	}
 
 }

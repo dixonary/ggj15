@@ -16,7 +16,7 @@ class Main extends Sprite
 	var framerate:Int  = 60;   
 	var skipSplash:Bool 	 = true; 	 
 	var startFullscreen:Bool = false; 
-	var initialState:Class<FlxState> = MenuState;
+	var initialState:Class<FlxState> = DataLoaderState;
 	
 	public static function main():Void {	
 		Lib.current.addChild(new Main());

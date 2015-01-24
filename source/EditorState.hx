@@ -10,6 +10,10 @@ class EditorState extends FlxState
 	override public function create():Void {
 		super.create();
 		FlxG.camera.antialiasing = true;
+
+        for (stage in Reg.stages) {
+
+        }
 	}
 	
 	override public function destroy():Void {
