@@ -50,7 +50,6 @@ class ChoiceButton extends FlxSpriteGroup {
 		super(X, Y);
 
 		link = Link;
-
 		bg = new FlxSprite();
         bg.makeGraphic(cast Width, cast Height, 0x00123456, true);
         bg.drawRoundRect(1, 1, Width-2, Height-2, Height/4,Height/4,0xff123456,

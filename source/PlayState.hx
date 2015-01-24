@@ -48,6 +48,7 @@ class PlayState extends FlxState
 
 		if(FlxG.keys.justPressed.Q)
 			Sys.exit(0);
+		
 	}	
 
 	public function switchStage(NextStage:Int):Void {
