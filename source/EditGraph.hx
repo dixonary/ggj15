@@ -122,7 +122,6 @@ class EditGraph extends FlxSpriteGroup
             }
         } else if(selectMode == EDIT) {
             if(FlxG.keys.anyJustPressed(["ESCAPE", "ENTER"])) {
-                popup.
                 remove(popup);
                 popup = null;
                 selectMode = SELECT;
