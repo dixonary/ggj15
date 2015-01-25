@@ -29,6 +29,7 @@ class Arc extends FlxSprite {
         var dy = ToY-FromY;
         var length:Int = cast Math.sqrt(dx*dx+dy*dy);
 
+
         x = FromX;
         y = FromY - height/2;
 
