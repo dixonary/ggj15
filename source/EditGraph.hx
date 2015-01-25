@@ -56,16 +56,19 @@ class EditGraph extends FlxSpriteGroup
             drawLinks(node);
             if (node.pixelsOverlapPoint(mousePos)) {
                 mouseOverNode = node;
-                node.hover = true;
-            } else {
-                node.hover = false;
             }
+            node.hover = false;
+        }
+
+        // show which node has focus
+        if (mouseOverNode != null) {
+            mouseOverNode.hover = true;
         }
 
         // Clicking
         if(FlxG.mouse.justPressed) {
             switch(selectMode) {
-                case SELECT: 
+                case SELECT:
                     if(mouseOverNode == null) {
                         deselect();
                     }
@@ -75,6 +78,9 @@ class EditGraph extends FlxSpriteGroup
                 case LINK:
                     if(mouseOverNode != null) {
                         selected.addChild(mouseOverNode, linkIndex);
+                    } else {
+                        selected.selected = false;
+                        selected = null;
                     }
                     selectMode = SELECT;
                 default:
@@ -113,11 +119,15 @@ class EditGraph extends FlxSpriteGroup
                     i++;
                 }
             }
-        }
-        if(selectMode == EDIT) {
+        } else if(selectMode == EDIT) {
             if(FlxG.keys.justPressed.ESCAPE) {
                 remove(popup);
                 popup = null;
+                selectMode = SELECT;
+            }
+        } else if (selectMode == LINK) {
+            if (FlxG.keys.justPressed.DELETE) {
+                selected.removeChoice(linkIndex);
                 selectMode = SELECT;
             }
         }
@@ -161,15 +171,18 @@ class EditGraph extends FlxSpriteGroup
                 arcList[stage.id][i] = null;
             } else {
                 var target = graph[choice.link];
+                var halfSize = StageEdit.size/2;
+                var nX = n.x + halfSize;
+                var nY = n.y + halfSize;
+                var targetX = target.x + halfSize;
+                var targetY = target.y + halfSize;
+
                 if (arc == null) {
-                    arcList[stage.id][i] = arc = new Arc(
-                        n.x+StageEdit.size/2, n.y+StageEdit.size/2, 
-                        target.x+StageEdit.size/2, target.y+StageEdit.size/2);
+                    arcList[stage.id][i] =
+                                     arc = new Arc(nX, nY, targetX, targetY);
                     arcs.add(arc);
                 } else {
-                    arc.updatePos(
-                        n.x+StageEdit.size/2, n.y+StageEdit.size/2, 
-                        target.x+StageEdit.size/2, target.y+StageEdit.size/2);
+                    arc.updatePos(nX, nY, targetX, targetY);
                 }
             }
         }
