@@ -66,6 +66,6 @@ class StageEdit extends FlxSpriteGroup
         if (stage.choices[choice] != null) {
             newText = stage.choices[choice].text;
         }
-        stage.choices[choice] = {link: choice, text: newText};
+        stage.choices[choice] = {link: child.stage.id, text: newText};
     }
 }
