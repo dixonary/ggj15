@@ -9,6 +9,7 @@ using flixel.util.FlxSpriteUtil;
 
 class StageView extends FlxSpriteGroup {
 	private var whatNow:FlxText;	
+	private var text:FlxText;
 	private var choices:Array<ChoiceButton>;
 
     var stage:Reg.Stage;
@@ -17,7 +18,13 @@ class StageView extends FlxSpriteGroup {
 		super();
         stage = _stage;
 
-		whatNow = new FlxText(0, FlxG.height/6, FlxG.width, "", cast FlxG.height/15);
+        text = new FlxText(0, FlxG.height/6, FlxG.width, 
+        	_stage.text, cast FlxG.height/20);
+        text.alignment = "center";
+        add(text);
+
+		whatNow = new FlxText(0, FlxG.height/3, FlxG.width, 
+			_stage.title==""?"":"What do we do now, " + _stage.title, cast FlxG.height/15);
 		whatNow.alignment = "center";
 		add(whatNow);
 
@@ -25,7 +32,7 @@ class StageView extends FlxSpriteGroup {
 		var ch = stage.choices;
 		for(i in 0 ... ch.length) {
 			var c = new ChoiceButton(
-				FlxG.width/4, FlxG.height/2+i*FlxG.height/6, FlxG.width/2,FlxG.height/8, 
+				FlxG.width/8, FlxG.height/2+i*FlxG.height/6, FlxG.width*0.75,FlxG.height/8, 
 				i, ch[i].link, ch[i].text);
 			choices.push(c);
 			add(c);
@@ -34,7 +41,6 @@ class StageView extends FlxSpriteGroup {
 
 	override public function update():Void {
 		super.update();
-		whatNow.text = "What do we do now, " + stage.title; 
 	}
 }
 
@@ -57,7 +63,7 @@ class ChoiceButton extends FlxSpriteGroup {
         	{thickness:2, color:0xff2468ac, pixelHinting:true});
         add(bg);
 
-        label = new FlxText(0,0.1*Height,Width,Text,cast 0.6*Height);
+        label = new FlxText(-Width,0.3*Height,Width*3,Text,cast 0.4*Height);
         label.alignment = "center";
         add(label);
 

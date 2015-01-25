@@ -47,6 +47,7 @@ class DataLoaderState extends FlxState {
         var stages = haxe.Json.parse(e.target.data);
 
         //If no level data exists, initialise as empty
+        Reg.stage = 0;
         FlxG.switchState(Type.createInstance(nextState,[stages]));
     }
 

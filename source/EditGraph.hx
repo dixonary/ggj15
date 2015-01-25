@@ -45,6 +45,8 @@ class EditGraph extends FlxSpriteGroup
             ++i;
             add(s);
         }
+
+        select(graph[Reg.stage]);
     }
 
     override public function update():Void
@@ -101,18 +103,37 @@ class EditGraph extends FlxSpriteGroup
                     //Remove node
                 }
                 if(FlxG.keys.justPressed.ENTER) {
-                    selectMode = EDIT;
-                    add(popup = new StageEditPopup(selected.stage));
+                    openPopup(selected.stage.id);
+                }
+                if(FlxG.keys.justPressed.F5) {
+                    FlxG.switchState(new PlayState(
+                        graph.map(function(st){return st.stage;}), selected.stage.id));
+                    return;
                 }
             }
             if(FlxG.keys.justPressed.INSERT) {
                 addNode();
             }
+            if(FlxG.keys.justPressed.F5) {
+                FlxG.switchState(new PlayState(
+                    graph.map(function(st){return st.stage;})));
+                return;
+            }
         } else if(selectMode == EDIT) {
-            if(FlxG.keys.anyJustPressed(["ESCAPE", "ENTER"])) {
-                remove(popup);
-                popup = null;
-                selectMode = SELECT;
+            if(FlxG.keys.anyJustPressed(["ENTER"])) {
+                closePopup();
+            }
+            if(FlxG.keys.anyJustPressed(["ONE"])) {
+                if(selected.stage.choices[0] != null)
+                openPopup(selected.stage.choices[0].link);
+            }
+            if(FlxG.keys.anyJustPressed(["TWO"])) {
+                if(selected.stage.choices[1] != null)
+                openPopup(selected.stage.choices[1].link);
+            }
+            if(FlxG.keys.anyJustPressed(["THREE"])) {
+                if(selected.stage.choices[2] != null)
+                openPopup(selected.stage.choices[2].link);
             }
         } else if (selectMode == LINK) {
             if (FlxG.keys.justPressed.DELETE) {
@@ -133,7 +154,17 @@ class EditGraph extends FlxSpriteGroup
 
         super.update();
     }
-
+    function closePopup() {
+        if(popup != null) popup.destroy(); 
+        popup = null;
+        selectMode = SELECT;
+    }
+    function openPopup(_id:Int) {
+        closePopup();
+        select(graph[_id]);
+        add(popup = new StageEditPopup(graph[_id].stage));
+        selectMode = EDIT;
+    }
     function deselect() {
         if(selected != null)
             selected.selected = false;
@@ -205,7 +236,7 @@ class EditGraph extends FlxSpriteGroup
             if(graph[i] == null) {
                 var s = new StageEdit(
                 {id:i, world:"WORLD", title:"TITLE",
-                choices:[], image:"", x:null, y:null},
+                choices:[], image:"", x:null, y:null, text:"FEEDBACK"},
                  i);
                 graph[i] = s;
                 add(s);

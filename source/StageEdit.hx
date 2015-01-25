@@ -22,9 +22,11 @@ class StageEdit extends FlxSpriteGroup
     var followMouse:Bool = false;
     var mouseOffset:FlxPoint;
 
-    public function new(_stage:Reg.Stage, hack_index:Int)
+    public function new(_stage:Reg.Stage, _index:Int)
     {
-        super((hack_index % 6) * size*1.1, Math.floor(hack_index /  6) * size*1.1);
+        var x1 = _stage.x == null ? (_index % 15) * size*1.1 : _stage.x;
+        var y1 = _stage.y == null ? Math.floor(_index /  15) * size*1.1:_stage.y;
+        super(x1, y1);
         stage = _stage;
 
         box.makeGraphic(size,size);
@@ -58,6 +60,12 @@ class StageEdit extends FlxSpriteGroup
             x = newPos.x;
             y = newPos.y;
         }
+
+        x = Math.floor(x / (size/2)) * (size/2);
+        y = Math.floor(y / (size/2)) * (size/2);
+
+        stage.x = x;
+        stage.y = y;
 
         super.update();
     }

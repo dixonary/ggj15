@@ -12,6 +12,7 @@ typedef Stage = {
     var y:Null<Float>;
     var world:String;
     var image:String;
+    var text:String;
     var title:String;
     var choices:Array<Choice>;
 }

@@ -17,9 +17,10 @@ class PlayState extends FlxState
 	private var moving = false;
     var stages:Array<Reg.Stage>;
 
-    public function new(_stages:Array<Reg.Stage>) {
+    public function new(_stages:Array<Reg.Stage>, ?_start:Int = 0) {
         super();
         stages = _stages;
+        Reg.stage = _start;
     }
 
 	override public function create():Void {
@@ -31,8 +32,6 @@ class PlayState extends FlxState
 
 		worldName = new FlxText(0,0,FlxG.width, "", 24);
 		add(worldName);
-
-		Reg.stage = 0;
 
 		currentStage = new StageView(stages[Reg.stage]);
 		stageViews.add(currentStage);
@@ -50,6 +49,7 @@ class PlayState extends FlxState
         if(FlxG.keys.justPressed.F5) {
             FlxG.switchState((new EditorState(stages)));
         }
+
 		if(FlxG.keys.justPressed.END)
 			Sys.exit(0);
 

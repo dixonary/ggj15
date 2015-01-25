@@ -28,6 +28,8 @@ class StageEditPopup extends FlxSpriteGroup {
         add(bg=new FlxSprite().makeGraphic(width, height, 0xaa000000)
             .drawRect(0, 0, width-2, height-2, 0xff333333, {thickness:2, color:0xffffffff}));
 
+        addRow(0,"", Stage.text, function(s1, _) {Stage.text=s1;});
+
         addRow(0.2, "World:", Stage.world,
             function(s1,_){ Stage.world=s1; });
 
@@ -107,9 +109,13 @@ class Row extends FlxSpriteGroup {
 
     }
 
+    override public function kill() {
+        super.kill();
+        destroy();
+    }
     override public function destroy() {
         super.destroy();
-        contents.kill();
+        contents.destroy();
         bg.destroy();
         label.destroy();
     }

@@ -32,7 +32,7 @@ class EditorState extends FlxState
 		super.update();
 
 		if(FlxG.keys.justPressed.END)
-			FlxG.switchState(new PlayState(stages));
+			Sys.exit(0);
 	}
 
 }
