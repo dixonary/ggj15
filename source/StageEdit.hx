@@ -9,7 +9,7 @@ import flixel.addons.display.FlxExtendedSprite;
 
 class StageEdit extends FlxSpriteGroup
 {
-    inline static var size:Int = 30;
+    inline static var size:Int = 50;
     public var selected = false;
     public var changed = false;
     public var hover = false;
@@ -23,7 +23,7 @@ class StageEdit extends FlxSpriteGroup
 
     public function new(_stage:Reg.Stage, hack_index:Int)
     {
-        super((hack_index % 6) * size, Math.floor(hack_index /  6) * size);
+        super((hack_index % 6) * size*1.1, Math.floor(hack_index /  6) * size*1.1);
         stage = _stage;
 
         box.makeGraphic(size,size);

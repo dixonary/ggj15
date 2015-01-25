@@ -30,9 +30,9 @@ class EditGraph extends FlxSpriteGroup
         // add nodes
         var i:Int = 0;
         for (stage in _stages) {
-            ++i;
             var s = new StageEdit(Reflect.copy(stage), i);
             graph[stage.id] = s;
+            ++i;
             add(s);
         }
     }
@@ -67,11 +67,31 @@ class EditGraph extends FlxSpriteGroup
         }
 
         // Checking for link mode
-        if (selectMode == SELECT && selected != null) {
-            for (i in (0 ... linkKeys.length)) {
-                if (FlxG.keys.checkStatus(linkKeys[i], FlxKey.JUST_PRESSED)) {
-                    linkIndex = i;
-                    selectMode = LINK;
+        if (selectMode == SELECT) {
+            if(selected != null) {
+                for (i in (0 ... linkKeys.length)) {
+                    if (FlxG.keys.checkStatus(linkKeys[i], FlxKey.JUST_PRESSED)) {
+                        linkIndex = i;
+                        selectMode = LINK;
+                    }
+                }
+                if(FlxG.keys.pressed.SHIFT && FlxG.keys.justPressed.DELETE) {
+                    //Remove node
+                }
+            }
+            if(FlxG.keys.justPressed.INSERT) {
+                //Add new node
+                var i = 0;
+                while(true) {
+                    if(graph[i] == null) {
+                        var s = new StageEdit(
+                        {"id":i, "world":"___", "title":"hmm?", "choices":[], "image":""},
+                         i);
+                        graph[i] = s;
+                        add(s);
+                        break;
+                    }
+                    i++;
                 }
             }
         }
