@@ -7,7 +7,7 @@ import flixel.text.FlxText;
 import flash.events.Event;
 import flash.events.IOErrorEvent;
 
-/** 
+/**
  * State which does all the important data loading before the game starts.
  * Will only ever be run once per game to initialise stuff.
  */
@@ -23,7 +23,7 @@ class DataLoaderState extends FlxState {
                             "loading levels...");
         t.setFormat(null, 50, 0xffffffff, "center");
         add(t);
-        
+
         //Load save information
         if(FlxG.save.data.saveExists == null) {
             FlxG.save.data.saveExists = true;
@@ -37,17 +37,17 @@ class DataLoaderState extends FlxState {
         loader.load(new flash.net.URLRequest("assets/data/gamedata.json"));
 
         // //Disable sound tray
-        // FlxG.sound.muteKeys = 
-        // FlxG.sound.volumeDownKeys = 
+        // FlxG.sound.muteKeys =
+        // FlxG.sound.volumeDownKeys =
         // FlxG.sound.volumeUpKeys = null;
     }
 
     //Called when levels are finished downloading
     public function doneLevels(e:flash.events.Event):Void {
-        Reg.stages = haxe.Json.parse(e.target.data);
+        var stages = haxe.Json.parse(e.target.data);
 
         //If no level data exists, initialise as empty
-        FlxG.switchState(Type.createInstance(nextState,[]));
+        FlxG.switchState(Type.createInstance(nextState,[stages]));
     }
 
     //Called when levels FAIL to download
@@ -56,7 +56,7 @@ class DataLoaderState extends FlxState {
                             "An error has occurred");
         t.setFormat(null, 50, 0xffffffff, "center");
         add(t);
-        var t = new FlxText(0,FlxG.height/2+20, FlxG.width, 
+        var t = new FlxText(0,FlxG.height/2+20, FlxG.width,
                             "the level data could not be downloaded");
         t.setFormat(null, 20, 0xffffffff, "center");
         add(t);

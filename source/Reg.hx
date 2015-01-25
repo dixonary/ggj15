@@ -3,7 +3,6 @@ package ;
 class Reg
 {
 	// Globals
-	public static var stages:Array<Stage>;
 	public static var stage:Int;
 }
 

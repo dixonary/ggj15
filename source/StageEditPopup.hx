@@ -46,13 +46,13 @@ class StageEditPopup extends FlxSpriteGroup {
 
     }
 
-    public function addRow(SepPos:Float, Label:String, Init:String, 
+    public function addRow(SepPos:Float, Label:String, Init:String,
         F:String->String->Void, ?rowNum:Int) {
         if (rowNum == null) {
             rowNum = numRows++;
         }
         var k:Row;
-        add(k=new Row(height*0.1, height*(0.1+rowNum*0.11), width-height*0.2, 
+        add(k=new Row(height*0.1, height*(0.1+rowNum*0.11), width-height*0.2,
             height*0.1, SepPos, Label, Init, F));
         rows.push(k);
     }

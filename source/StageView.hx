@@ -11,18 +11,18 @@ class StageView extends FlxSpriteGroup {
 	private var whatNow:FlxText;	
 	private var choices:Array<ChoiceButton>;
 
-	private var stageNum:Int;
+    var stage:Reg.Stage;
 
-	function new(StageNum:Int):Void {
+	function new(_stage:Reg.Stage):Void {
 		super();
-		stageNum = StageNum;
+        stage = _stage;
 
 		whatNow = new FlxText(0, FlxG.height/6, FlxG.width, "", cast FlxG.height/15);
 		whatNow.alignment = "center";
 		add(whatNow);
 
 		choices = [];
-		var ch = Reg.stages[stageNum].choices;
+		var ch = stage.choices;
 		for(i in 0 ... ch.length) {
 			var c = new ChoiceButton(
 				FlxG.width/4, FlxG.height/2+i*FlxG.height/6, FlxG.width/2,FlxG.height/8, 
@@ -34,7 +34,7 @@ class StageView extends FlxSpriteGroup {
 
 	override public function update():Void {
 		super.update();
-		whatNow.text = "What do we do now, " + Reg.stages[stageNum].title; 
+		whatNow.text = "What do we do now, " + stage.title; 
 	}
 }
 

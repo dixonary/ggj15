@@ -13,7 +13,7 @@ class StageEdit extends FlxSpriteGroup
     public inline static var defaultColor = 0xcc996699;
     public inline static var selectedColor = 0xcccc8855;
     public inline static var hoverColor = 0x99aa6644;
-    
+
     public var selected = false;
     public var changed = false;
     public var hover = false;
