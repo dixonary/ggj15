@@ -62,6 +62,10 @@ class StageEdit extends FlxSpriteGroup
     }
 
     public function addChild(child:StageEdit, choice:Int) {
-        stage.choices[choice].link = child.stage.id;
+        var newText = "";
+        if (stage.choices[choice] != null) {
+            newText = stage.choices[choice].text;
+        }
+        stage.choices[choice] = {link: choice, text: newText};
     }
 }

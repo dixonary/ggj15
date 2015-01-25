@@ -12,12 +12,11 @@ class EditGraph extends FlxSpriteGroup
 {
     var linkIndex:Int = 0;
     var graph:Array<StageEdit> = [];
-
     var selected:StageEdit;
-    var selectMode:SelectMode = SELECT;
-
     var modeText:FlxText;
     var linkKeys:Array<Int> = [FlxKey.ONE, FlxKey.TWO, FlxKey.THREE];
+
+    var selectMode:SelectMode = SELECT;
 
     public function new(_stages:Array<Reg.Stage>)
     {
@@ -43,7 +42,7 @@ class EditGraph extends FlxSpriteGroup
         var mousePos = FlxG.mouse.getWorldPosition();
         var mouseOverNode:StageEdit = null;
 
-        // Update all hovering
+        // update all nodes
         for (node in graph) {
             if (node.pixelsOverlapPoint(mousePos)) {
                 mouseOverNode = node;
@@ -61,9 +60,9 @@ class EditGraph extends FlxSpriteGroup
                     else 
                         select(mouseOverNode);
                 case LINK:
-                    deselect();
-                    if(mouseOverNode != null){}
-                        //TODO: Link nodes
+                    if(mouseOverNode != null)
+                        selected.addChild(mouseOverNode, linkIndex);
+                    selectMode = SELECT;
             }
         }
 
