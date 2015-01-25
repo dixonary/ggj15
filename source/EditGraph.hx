@@ -67,7 +67,7 @@ class EditGraph extends FlxSpriteGroup
         }
 
         // Checking for link mode
-        if (selectMode == SELECT && selected != null) {
+        if (selected != null) {
             for (i in (0 ... linkKeys.length)) {
                 if (FlxG.keys.checkStatus(linkKeys[i], FlxKey.JUST_PRESSED)) {
                     linkIndex = i;
