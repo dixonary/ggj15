@@ -64,20 +64,14 @@ class PlayState extends FlxState
 		stageViews.add(currentStage);
 		currentStage.y = FlxG.height;
 		moving = true;
-
-		//Fade out current stage
-		FlxTween.tween(prevStage, {alpha:0}, 0.5,
-		    {ease:FlxEase.quadInOut,
-		    complete:function(_){
-			    prevStage.destroy();
-			    prevStage = null;
-			    moving = false;
-		    }});
-		//Delay, then bring in new stage
-		new FlxTimer(1.5, function(_){
-			FlxTween.tween(currentStage, {y:0}, 1,
-			{ease:FlxEase.quadInOut});
+		prevStage.close();
+		prevStage = null;
+		new FlxTimer(
+			0.5, function(_){
+		    prevStage = null;
+		    moving = false;
 			});
+
 	}
 
 }

@@ -3,7 +3,12 @@ package ;
 import flixel.group.FlxSpriteGroup;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxTimer;
+import flixel.tweens.FlxEase;
 import flixel.text.FlxText;
+import sys.FileSystem;
+import sys.io.File;
 
 using flixel.util.FlxSpriteUtil;
 
@@ -11,6 +16,8 @@ class StageView extends FlxSpriteGroup {
 	private var whatNow:FlxText;	
 	private var text:FlxText;
 	private var choices:Array<ChoiceButton>;
+	private var stuff:FlxSpriteGroup;
+	private var bg:FlxSprite;
 
     var stage:Reg.Stage;
 
@@ -18,16 +25,33 @@ class StageView extends FlxSpriteGroup {
 		super();
         stage = _stage;
 
+
+		if(FileSystem.exists("assets/images/"+_stage.id+".png")) {
+			bg = new FlxSprite(0,0,"assets/images/"+_stage.id+".png");
+			add(bg);
+			bg.alpha = 0.01;
+			FlxTween.tween(bg, {alpha:1}, 1);
+		}
+		else {
+			bg = new FlxSprite();
+			bg.alpha = 0;
+		}
+
+        stuff = new FlxSpriteGroup();
+
         text = new FlxText(0, FlxG.height/6, FlxG.width, 
         	_stage.text, cast FlxG.height/20);
         text.alignment = "center";
+        text.borderStyle = FlxText.BORDER_OUTLINE;
+        text.borderSize = 3;
         add(text);
 
 		whatNow = new FlxText(0, FlxG.height/3, FlxG.width, 
 			_stage.title==""?"":"What do we do now, " + _stage.title, cast FlxG.height/15);
 		whatNow.alignment = "center";
+		whatNow.borderSize = 3;
+        whatNow.borderStyle = FlxText.BORDER_OUTLINE;
 		add(whatNow);
-
 		choices = [];
 		var ch = stage.choices;
 		for(i in 0 ... ch.length) {
@@ -36,11 +60,30 @@ class StageView extends FlxSpriteGroup {
 				i, ch[i].link, ch[i].text);
 			choices.push(c);
 			add(c);
-		}	
+		}
+
+		add(stuff);
+
+		//Delay, then bring in new stage
+		new FlxTimer(1.5, function(_){
+			FlxTween.tween(this, {y:0}, 1,
+			{ease:FlxEase.quadInOut});
+			});
+
 	}
 
 	override public function update():Void {
 		super.update();
+		bg.x = FlxG.width/2-bg.width/2;
+		bg.y = FlxG.height/2-bg.height/2;
+	}
+	public function close():Void {
+		//Fade out current stage
+		FlxTween.tween(this, {alpha:0}, 0.5,
+		    {ease:FlxEase.quadInOut,
+		    complete:function(_){
+			    destroy();
+		    }});	
 	}
 }
 
