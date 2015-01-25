@@ -44,7 +44,7 @@ class StageEdit extends FlxSpriteGroup
             box.color = defaultColor;
         }
         var mousePos = FlxG.mouse.getWorldPosition();
-        if (box.mouseOver && FlxG.mouse.justPressed) {
+        if (box.mouseOver && FlxG.mouse.justPressed && selected) {
             var pos = new FlxPoint(x,y);
             followMouse = true;
             mouseOffset = pos.subtractPoint(mousePos);
@@ -61,11 +61,15 @@ class StageEdit extends FlxSpriteGroup
         super.update();
     }
 
-    public function addChild(child:StageEdit, choice:Int) {
+    public function addChild(child:StageEdit, choice:Int):Void {
         var newText = "";
         if (stage.choices[choice] != null) {
             newText = stage.choices[choice].text;
         }
         stage.choices[choice] = {link: child.stage.id, text: newText};
+    }
+
+    public function removeChoice(choice:Int):Void {
+        stage.choices[choice] = null;
     }
 }
