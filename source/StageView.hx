@@ -38,6 +38,7 @@ class StageView extends FlxSpriteGroup {
 	}
 }
 
+
 class ChoiceButton extends FlxSpriteGroup {
 
 	private var bg:FlxSprite;

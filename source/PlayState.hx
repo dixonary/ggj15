@@ -43,10 +43,7 @@ class PlayState extends FlxState
 
 		worldName.text = Reg.stages[Reg.stage].world;
 
-		if(FlxG.keys.pressed.N)
-			switchStage(0);
-
-		if(FlxG.keys.justPressed.Q)
+		if(FlxG.keys.justPressed.END)
 			Sys.exit(0);
 		
 	}	

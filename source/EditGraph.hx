@@ -12,11 +12,12 @@ class EditGraph extends FlxSpriteGroup
 {
     var linkIndex:Int = 0;
     var graph:Array<StageEdit> = [];
+
     var selected:StageEdit;
+    var selectMode:SelectMode = SELECT;
+
     var modeText:FlxText;
     var linkKeys:Array<Int> = [FlxKey.ONE, FlxKey.TWO, FlxKey.THREE];
-
-    var selectMode:SelectMode = SELECT;
 
     public function new(_stages:Array<Reg.Stage>)
     {
@@ -42,51 +43,38 @@ class EditGraph extends FlxSpriteGroup
         var mousePos = FlxG.mouse.getWorldPosition();
         var mouseOverNode:StageEdit = null;
 
-        if (selected == null) {
-        }
-
-        // update all nodes
+        // Update all hovering
         for (node in graph) {
-            if (node.changed) {
-                node.changed = false;
-            }
-
-            if (FlxCollision.pixelPerfectPointCheck(
-                        cast(mousePos.x), cast(mousePos.y), node.box)) {
+            if (node.pixelsOverlapPoint(mousePos)) {
                 mouseOverNode = node;
-            } else {
-                if (FlxG.mouse.justPressed && selectMode == SELECT) {
-                    node.selected = false;
-                }
+                node.hover = true;
+            } else
                 node.hover = false;
+        }
+
+        // Clicking
+        if(FlxG.mouse.justPressed) {
+            switch(selectMode) {
+                case SELECT: 
+                    if(mouseOverNode == null)
+                        deselect();
+                    else 
+                        select(mouseOverNode);
+                case LINK:
+                    deselect();
+                    if(mouseOverNode != null){}
+                        //TODO: Link nodes
             }
         }
 
-        // set link mode
-        if (selected != null) {
+        // Checking for link mode
+        if (selectMode == SELECT && selected != null) {
             for (i in (0 ... linkKeys.length)) {
                 if (FlxG.keys.checkStatus(linkKeys[i], FlxKey.JUST_PRESSED)) {
                     linkIndex = i;
                     selectMode = LINK;
                 }
             }
-        } else if (selectMode == LINK) {
-            selectMode = SELECT;
-        }
-
-        // update focussed node
-        if (mouseOverNode != null) {
-            mouseOverNode.hover = true;
-            if (FlxG.mouse.justPressed) {
-                if (selectMode == SELECT) {
-                    selected = mouseOverNode;
-                    selected.selected = true;
-                } else if (selectMode == LINK) {
-                    selected.addChild(mouseOverNode, linkIndex);
-                }
-            }
-        } else if (FlxG.mouse.justPressed) {
-            selectMode = SELECT;
         }
 
         // update mode text
@@ -96,5 +84,17 @@ class EditGraph extends FlxSpriteGroup
         }
 
         super.update();
+    }
+
+    function deselect() {
+        if(selected != null)
+            selected.selected = false;
+        selected = null;
+        selectMode = SELECT;
+    }
+    function select(N:StageEdit) {
+        deselect();
+        N.selected = true;
+        selected = N;
     }
 }
