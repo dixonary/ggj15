@@ -22,6 +22,7 @@ class MenuState extends FlxState
         edit.scale.set(4,4);
 		add(play);
 		add(edit);
+
 	}
 
     /*
@@ -35,5 +36,6 @@ class MenuState extends FlxState
 
         if(FlxG.keys.justPressed.END)
 			Sys.exit(0);
+
 	}
 }

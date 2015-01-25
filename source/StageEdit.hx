@@ -9,7 +9,7 @@ import flixel.addons.display.FlxExtendedSprite;
 
 class StageEdit extends FlxSpriteGroup
 {
-    inline static var size:Int = 50;
+    public inline static var size:Int = 50;
     public var selected = false;
     public var changed = false;
     public var hover = false;

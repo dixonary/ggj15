@@ -16,12 +16,17 @@ class EditGraph extends FlxSpriteGroup
     var modeText:FlxText;
     var linkKeys:Array<Int> = [FlxKey.ONE, FlxKey.TWO, FlxKey.THREE];
     var arcList:Array<Array<Arc>> = [];
+    var arcs:FlxSpriteGroup;
 
     var selectMode:SelectMode = SELECT;
 
     public function new(_stages:Array<Reg.Stage>)
     {
         super();
+
+        //Add behind arc group
+        arcs = new FlxSpriteGroup();
+        add(arcs);
 
         // add ui text reflecting mode
         modeText = new FlxText(FlxG.width / 2, FlxG.height / 2, "SELECT", 30);
@@ -133,15 +138,19 @@ class EditGraph extends FlxSpriteGroup
             var choice = stage.choices[i];
 
             if (choice == null) {
-                remove(arc);
-                arc = null;
+                arcs.remove(arc);
+                arcList[stage.id][i] = null;
             } else {
                 var target = graph[choice.link];
                 if (arc == null) {
-                    arc = new Arc(n.x, n.y, target.x, target.y);
-                    add(arc);
+                    arcList[stage.id][i] = arc = new Arc(
+                        n.x+StageEdit.size/2, n.y+StageEdit.size/2, 
+                        target.x+StageEdit.size/2, target.y+StageEdit.size/2);
+                    arcs.add(arc);
                 } else {
-                    arc.updatePos(n.x, n.y, target.x, target.y);
+                    arc.updatePos(
+                        n.x+StageEdit.size/2, n.y+StageEdit.size/2, 
+                        target.x+StageEdit.size/2, target.y+StageEdit.size/2);
                 }
             }
         }
