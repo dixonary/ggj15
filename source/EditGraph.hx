@@ -15,6 +15,7 @@ class EditGraph extends FlxSpriteGroup
     var selected:StageEdit;
     var modeText:FlxText;
     var linkKeys:Array<Int> = [FlxKey.ONE, FlxKey.TWO, FlxKey.THREE];
+    var arcList:Array<Array<Arc>> = [];
 
     var selectMode:SelectMode = SELECT;
 
@@ -44,24 +45,29 @@ class EditGraph extends FlxSpriteGroup
 
         // update all nodes
         for (node in graph) {
+            drawLinks(node);
             if (node.pixelsOverlapPoint(mousePos)) {
                 mouseOverNode = node;
                 node.hover = true;
-            } else
+            } else {
                 node.hover = false;
+            }
         }
 
         // Clicking
         if(FlxG.mouse.justPressed) {
             switch(selectMode) {
                 case SELECT: 
-                    if(mouseOverNode == null)
+                    if(mouseOverNode == null) {
                         deselect();
-                    else 
+                    }
+                    else {
                         select(mouseOverNode);
+                    }
                 case LINK:
-                    if(mouseOverNode != null)
+                    if(mouseOverNode != null) {
                         selected.addChild(mouseOverNode, linkIndex);
+                    }
                     selectMode = SELECT;
             }
         }
@@ -115,5 +121,29 @@ class EditGraph extends FlxSpriteGroup
         deselect();
         N.selected = true;
         selected = N;
+    }
+
+    function drawLinks(n:StageEdit) {
+        var stage = n.stage;
+        for (i in (0...3)) {
+            if (arcList[stage.id] == null) {
+                arcList[stage.id] = [];
+            }
+            var arc = arcList[stage.id][i];
+            var choice = stage.choices[i];
+
+            if (choice == null) {
+                remove(arc);
+                arc = null;
+            } else {
+                var target = graph[choice.link];
+                if (arc == null) {
+                    arc = new Arc(n.x, n.y, target.x, target.y);
+                    add(arc);
+                } else {
+                    arc.updatePos(n.x, n.y, target.x, target.y);
+                }
+            }
+        }
     }
 }
