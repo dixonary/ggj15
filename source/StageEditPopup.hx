@@ -94,7 +94,7 @@ class Row extends FlxSpriteGroup {
         label.setFormat(null, cast height*0.6, 0xffffffff, "right");
         add(label);
 
-        contents = new FlxInputText(Width*(0.02+SepBar), Height*0.1,
+        contents = new InputBox(Width*(0.02+SepBar), Height*0.1,
             cast Width*(1-SepBar-0.02)-4, InitContents, cast Height*0.6);
         contents.backgroundColor = 0xff333333;
         contents.fieldBorderThickness=0;
