@@ -42,9 +42,6 @@ class EditGraph extends FlxSpriteGroup
         var mousePos = FlxG.mouse.getWorldPosition();
         var mouseOverNode:StageEdit = null;
 
-        if (selected == null) {
-        }
-
         // update all nodes
         for (node in graph) {
             if (node.changed) {
@@ -62,7 +59,7 @@ class EditGraph extends FlxSpriteGroup
             }
         }
 
-        // set link mode
+        // set selectMode
         if (selected != null) {
             for (i in (0 ... linkKeys.length)) {
                 if (FlxG.keys.checkStatus(linkKeys[i], FlxKey.JUST_PRESSED)) {
@@ -70,8 +67,11 @@ class EditGraph extends FlxSpriteGroup
                     selectMode = LINK;
                 }
             }
-        } else if (selectMode == LINK) {
-            selectMode = SELECT;
+        } else {
+            // no selected node
+            if (selectMode == LINK) {
+                selectMode = SELECT;
+            }
         }
 
         // update focussed node
@@ -86,7 +86,11 @@ class EditGraph extends FlxSpriteGroup
                 }
             }
         } else if (FlxG.mouse.justPressed) {
-            selectMode = SELECT;
+            // no node focussed but user has clicked
+            if (selected != null) {
+                selectMode = SELECT;
+                selected.selected = false;
+            }
         }
 
         // update mode text
