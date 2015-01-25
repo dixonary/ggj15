@@ -97,7 +97,7 @@ class EditGraph extends FlxSpriteGroup
                 if(FlxG.keys.pressed.SHIFT && FlxG.keys.justPressed.DELETE) {
                     //Remove node
                 }
-                if(FlxG.keys.pressed.ENTER) {
+                if(FlxG.keys.justPressed.ENTER) {
                     selectMode = EDIT;
                     add(popup = new StageEditPopup(selected.stage));
                 }
@@ -118,7 +118,8 @@ class EditGraph extends FlxSpriteGroup
                 }
             }
         } else if(selectMode == EDIT) {
-            if(FlxG.keys.justPressed.ESCAPE) {
+            if(FlxG.keys.anyJustPressed(["ESCAPE", "ENTER"])) {
+                popup.
                 remove(popup);
                 popup = null;
                 selectMode = SELECT;
