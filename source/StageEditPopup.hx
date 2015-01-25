@@ -31,7 +31,8 @@ class StageEditPopup extends FlxSpriteGroup {
         addRow(0.6, "What should we do now,", Stage.title, 
             function(s1,_){ Stage.title=s1; });
 
-        for(i in 0 ... stage.choices.length) {
+        for(i in 0 ... 2) {
+            if(stage.choices[i] != null)
             addRow(0.2, ""+stage.choices[i].link, stage.choices[i].text, 
                 function(s1,_) { stage.choices[i].text = s1; });
         }
