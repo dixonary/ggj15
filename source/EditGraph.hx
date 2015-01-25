@@ -27,15 +27,15 @@ class EditGraph extends FlxSpriteGroup
     {
         super();
 
-        //Add behind arc group
-        arcs = new FlxSpriteGroup();
-        add(arcs);
-
         // add ui text reflecting mode
-        modeText = new FlxText(0, FlxG.height/2-50, FlxG.width, "SELECT", 90);
+        modeText = new FlxText(0, FlxG.height/2-50, FlxG.width, "SELECT", 30);
         modeText.alignment="center";
         modeText.color = 0xff666666;
         add(modeText);
+
+        //Add behind arc group
+        arcs = new FlxSpriteGroup();
+        add(arcs);
 
         // add nodes
         var i:Int = 0;
