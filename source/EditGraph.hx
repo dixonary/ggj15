@@ -6,7 +6,7 @@ import flixel.util.FlxCollision;
 import flixel.text.FlxText;
 import flixel.input.keyboard.FlxKey;
 
-enum SelectMode { SELECT; LINK; }
+enum SelectMode { SELECT; LINK; EDIT; }
 
 class EditGraph extends FlxSpriteGroup
 {
@@ -17,6 +17,7 @@ class EditGraph extends FlxSpriteGroup
     var linkKeys:Array<Int> = [FlxKey.ONE, FlxKey.TWO, FlxKey.THREE];
     var arcList:Array<Array<Arc>> = [];
     var arcs:FlxSpriteGroup;
+    var popup:StageEditPopup;
 
     var selectMode:SelectMode = SELECT;
 
@@ -74,6 +75,7 @@ class EditGraph extends FlxSpriteGroup
                         selected.addChild(mouseOverNode, linkIndex);
                     }
                     selectMode = SELECT;
+                default:
             }
         }
 
@@ -88,6 +90,10 @@ class EditGraph extends FlxSpriteGroup
                 }
                 if(FlxG.keys.pressed.SHIFT && FlxG.keys.justPressed.DELETE) {
                     //Remove node
+                }
+                if(FlxG.keys.pressed.ENTER) {
+                    selectMode = EDIT;
+                    add(popup = new StageEditPopup(selected.stage));
                 }
             }
             if(FlxG.keys.justPressed.INSERT) {
@@ -106,11 +112,19 @@ class EditGraph extends FlxSpriteGroup
                 }
             }
         }
+        if(selectMode == EDIT) {
+            if(FlxG.keys.justPressed.ESCAPE) {
+                remove(popup);
+                popup = null;
+                selectMode = SELECT;
+            }
+        }
 
         // update mode text
         switch (selectMode) {
             case SELECT: modeText.text = "SELECT";
             case LINK: modeText.text = "LINK" + linkIndex;
+            case EDIT: modeText.text = "EDIT" + selected.stage.id;
         }
 
         super.update();

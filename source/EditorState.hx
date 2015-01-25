@@ -22,10 +22,7 @@ class EditorState extends FlxState
 
 	override public function update():Void {
 		super.update();
-
-		if(FlxG.keys.justPressed.S)
-			save(Reg.stages);
-
+		
 		if(FlxG.keys.justPressed.END)
 			FlxG.switchState(new PlayState());
 	}
