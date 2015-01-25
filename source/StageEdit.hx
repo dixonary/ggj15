@@ -10,6 +10,10 @@ import flixel.addons.display.FlxExtendedSprite;
 class StageEdit extends FlxSpriteGroup
 {
     public inline static var size:Int = 50;
+    public inline static var defaultColor = 0xcc996699;
+    public inline static var selectedColor = 0xcccc8855;
+    public inline static var hoverColor = 0x99aa6644;
+    
     public var selected = false;
     public var changed = false;
     public var hover = false;
@@ -17,9 +21,6 @@ class StageEdit extends FlxSpriteGroup
     public var box(default, null) = new FlxExtendedSprite();
     var followMouse:Bool = false;
     var mouseOffset:FlxPoint;
-    var defaultColor = 0xcc996699;
-    var selectedColor = 0xcccc8855;
-    var hoverColor = 0x99aa6644;
 
     public function new(_stage:Reg.Stage, hack_index:Int)
     {

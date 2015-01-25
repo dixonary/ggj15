@@ -32,7 +32,8 @@ class EditGraph extends FlxSpriteGroup
         add(arcs);
 
         // add ui text reflecting mode
-        modeText = new FlxText(FlxG.width / 2, FlxG.height / 2, "SELECT", 30);
+        modeText = new FlxText(0, FlxG.height-35, FlxG.width, "SELECT", 30);
+        modeText.alignment="right";
         modeText.color = 0xff666666;
         add(modeText);
 
