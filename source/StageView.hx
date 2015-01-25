@@ -65,7 +65,7 @@ class StageView extends FlxSpriteGroup {
 		add(stuff);
 
 		//Delay, then bring in new stage
-		new FlxTimer(1.5, function(_){
+		new FlxTimer(2, function(_){
 			FlxTween.tween(this, {y:0}, 1,
 			{ease:FlxEase.quadInOut});
 			});

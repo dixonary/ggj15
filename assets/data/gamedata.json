@@ -346,23 +346,23 @@
         "image": ""
     },
     {
-        "text": "",
+        "text": "You get shot by scavengers.",
         "world": "The surface",
         "choices": [],
         "x": 325,
         "y": 575,
         "id": 21,
-        "title": "friend?",
+        "title": "",
         "image": ""
     },
     {
-        "text": "FEEDBACK",
-        "world": "WORLD",
+        "text": "You get shot in the head by a religious fundamentalist.",
+        "world": "The Afterlife",
         "choices": [],
         "x": 400,
         "y": 100,
         "id": 22,
-        "title": "TITLE",
+        "title": "",
         "image": ""
     }
 ]
