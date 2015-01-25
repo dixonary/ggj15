@@ -106,20 +106,7 @@ class EditGraph extends FlxSpriteGroup
                 }
             }
             if(FlxG.keys.justPressed.INSERT) {
-                //Add new node
-                var i = 0;
-                while(true) {
-                    if(graph[i] == null) {
-                        var s = new StageEdit(
-                        {id:i, world:"WORLD", title:"TITLE", 
-                        choices:[], image:"", x:null, y:null},
-                         i);
-                        graph[i] = s;
-                        add(s);
-                        break;
-                    }
-                    i++;
-                }
+                addNode();
             }
         } else if(selectMode == EDIT) {
             if(FlxG.keys.anyJustPressed(["ESCAPE", "ENTER"])) {
@@ -190,23 +177,41 @@ class EditGraph extends FlxSpriteGroup
         }
     }
 
-    // Writes an array of stages to the filesystem 
+    // Writes an array of stages to the filesystem
     // and backs up the old version
     static function save(Stages:Array<Reg.Stage>):Void {
         if(FileSystem.exists("assets/data/gamedata-old")) {
             if(!FileSystem.isDirectory("assets/data/gamedata-old")) {
-                trace("Error: assets/data/gamedata-old exists 
+                trace("Error: assets/data/gamedata-old exists
                     but is not a directory; quitting");
                 return;
             }
         }
         else
             FileSystem.createDirectory("assets/data/gamedata-old");
-        
+
         FileSystem.rename(
-                    "assets/data/gamedata.json", 
+                    "assets/data/gamedata.json",
                     "assets/data/gamedata-old/"+Date.now()+".json");
 
         File.saveContent("assets/data/gamedata.json",haxe.Json.stringify(Stages,null,"    "));
+    }
+
+    function addNode()
+    {
+        //Add new node
+        var i = 0;
+        while(true) {
+            if(graph[i] == null) {
+                var s = new StageEdit(
+                {id:i, world:"WORLD", title:"TITLE",
+                choices:[], image:"", x:null, y:null},
+                 i);
+                graph[i] = s;
+                add(s);
+                break;
+            }
+            i++;
+        }
     }
 }
