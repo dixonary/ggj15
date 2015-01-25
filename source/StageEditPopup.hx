@@ -9,7 +9,7 @@ import flixel.group.FlxSpriteGroup;
 using flixel.util.FlxSpriteUtil;
 
 class StageEditPopup extends FlxSpriteGroup {
-    
+
     var stage:Reg.Stage;
     var bg:FlxSprite;
     var numRows = 0;
@@ -28,16 +28,17 @@ class StageEditPopup extends FlxSpriteGroup {
         add(bg=new FlxSprite().makeGraphic(width, height, 0xaa000000)
             .drawRect(0, 0, width-2, height-2, 0xff333333, {thickness:2, color:0xffffffff}));
 
-        addRow(0.2, "World:", Stage.world, 
+        addRow(0.2, "World:", Stage.world,
             function(s1,_){ Stage.world=s1; });
 
-        addRow(0.6, "What should we do now,", Stage.title, 
+        addRow(0.6, "What should we do now,", Stage.title,
             function(s1,_){ Stage.title=s1; });
 
-        for(i in 0 ... 2) {
-            if(stage.choices[i] != null)
-            addRow(0.2, ""+stage.choices[i].link, stage.choices[i].text, 
-                function(s1,_) { stage.choices[i].text = s1; });
+        for(i in 0 ... 3) {
+            if(stage.choices[i] != null) {
+                addRow(0.2, ""+stage.choices[i].link, stage.choices[i].text,
+                    function(s1,_) { stage.choices[i].text = s1; }, 4+i);
+            }
         }
 
         x = (FlxG.width-width)/2;
@@ -46,12 +47,14 @@ class StageEditPopup extends FlxSpriteGroup {
     }
 
     public function addRow(SepPos:Float, Label:String, Init:String, 
-        F:String->String->Void) {
+        F:String->String->Void, ?rowNum:Int) {
+        if (rowNum == null) {
+            rowNum = numRows++;
+        }
         var k:Row;
-        add(k=new Row(height*0.1, height*(0.1+numRows*0.11), width-height*0.2, 
+        add(k=new Row(height*0.1, height*(0.1+rowNum*0.11), width-height*0.2, 
             height*0.1, SepPos, Label, Init, F));
         rows.push(k);
-        numRows++;
     }
 
     override public function destroy() {
