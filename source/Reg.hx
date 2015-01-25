@@ -9,6 +9,8 @@ class Reg
 
 typedef Stage = {
     var id:Int;
+    var x:Null<Float>;
+    var y:Null<Float>;
     var world:String;
     var image:String;
     var title:String;

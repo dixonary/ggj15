@@ -32,8 +32,8 @@ class EditGraph extends FlxSpriteGroup
         add(arcs);
 
         // add ui text reflecting mode
-        modeText = new FlxText(0, FlxG.height-35, FlxG.width, "SELECT", 30);
-        modeText.alignment="right";
+        modeText = new FlxText(0, FlxG.height/2-50, FlxG.width, "SELECT", 90);
+        modeText.alignment="center";
         modeText.color = 0xff666666;
         add(modeText);
 
@@ -111,7 +111,8 @@ class EditGraph extends FlxSpriteGroup
                 while(true) {
                     if(graph[i] == null) {
                         var s = new StageEdit(
-                        {"id":i, "world":"___", "title":"hmm?", "choices":[], "image":""},
+                        {id:i, world:"WORLD", title:"TITLE", 
+                        choices:[], image:"", x:null, y:null},
                          i);
                         graph[i] = s;
                         add(s);
@@ -136,8 +137,8 @@ class EditGraph extends FlxSpriteGroup
         // update mode text
         switch (selectMode) {
             case SELECT: modeText.text = "SELECT";
-            case LINK: modeText.text = "LINK" + linkIndex;
-            case EDIT: modeText.text = "EDIT" + selected.stage.id;
+            case LINK: modeText.text = "LINK " + (linkIndex+1);
+            case EDIT: modeText.text = "EDIT " + (selected.stage.id+1);
         }
 
         if(selectMode == SELECT && FlxG.keys.justPressed.F4)
