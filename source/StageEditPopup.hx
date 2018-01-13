@@ -66,8 +66,8 @@ class StageEditPopup extends FlxSpriteGroup {
         }
     }
 
-    override public function update():Void {
-        super.update();
+    override public function update(elapsed:Float):Void {
+        super.update(elapsed);
 
         if(FlxG.keys.justPressed.ESCAPE) {
             destroy();

@@ -4,7 +4,7 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
-import flixel.util.FlxPoint;
+import flixel.math.FlxPoint;
 
 class MenuState extends FlxState
 {
@@ -37,8 +37,8 @@ class MenuState extends FlxState
 	}
     */
 
-	override public function update():Void {
-		super.update();
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
 
         if(FlxG.keys.justPressed.END)
 			Sys.exit(0);

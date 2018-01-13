@@ -5,6 +5,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxCollision;
 import flixel.text.FlxText;
 import flixel.input.keyboard.FlxKey;
+import flixel.input.FlxInput;
 import sys.FileSystem;
 import sys.io.File;
 
@@ -49,7 +50,7 @@ class EditGraph extends FlxSpriteGroup
         select(graph[Reg.stage]);
     }
 
-    override public function update():Void
+    override public function update(elapsed:Float):Void
     {
         var mousePos = FlxG.mouse.getWorldPosition();
         var mouseOverNode:StageEdit = null;
@@ -94,7 +95,7 @@ class EditGraph extends FlxSpriteGroup
         if (selectMode == SELECT) {
             if(selected != null) {
                 for (i in (0 ... linkKeys.length)) {
-                    if (FlxG.keys.checkStatus(linkKeys[i], FlxKey.JUST_PRESSED)) {
+                    if (FlxG.keys.checkStatus(linkKeys[i], FlxInputState.JUST_PRESSED)) {
                         linkIndex = i;
                         selectMode = LINK;
                     }
@@ -152,7 +153,7 @@ class EditGraph extends FlxSpriteGroup
         if(selectMode == SELECT && FlxG.keys.justPressed.F4)
             save(graph.map(function(st){return st.stage;}));
 
-        super.update();
+        super.update(elapsed);
     }
     function closePopup() {
         if(popup != null) popup.destroy(); 

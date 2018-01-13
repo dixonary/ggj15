@@ -63,8 +63,8 @@ class DataLoaderState extends FlxState {
         add(t);
     }
 
-    public override function update():Void {
-        super.update();
+    public override function update(elapsed:Float):Void {
+        super.update(elapsed);
         if(FlxG.keys.justPressed.Q)
             Sys.exit(0);
     }

@@ -2,7 +2,7 @@ package ;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.util.FlxPoint;
+import flixel.math.FlxPoint;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.addons.display.FlxExtendedSprite;
@@ -37,7 +37,7 @@ class StageEdit extends FlxSpriteGroup
         add(text);
     }
 
-    override public function update():Void
+    override public function update(elapsed:Float):Void
     {
         if (selected) {
             box.color = selectedColor;
@@ -67,7 +67,7 @@ class StageEdit extends FlxSpriteGroup
         stage.x = x;
         stage.y = y;
 
-        super.update();
+        super.update(elapsed);
     }
 
     public function addChild(child:StageEdit, choice:Int):Void {

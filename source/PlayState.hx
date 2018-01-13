@@ -1,6 +1,6 @@
 package ;
 
-import flixel.group.FlxTypedGroup;
+import flixel.group.FlxGroup;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.text.FlxText;
@@ -41,8 +41,8 @@ class PlayState extends FlxState
 		super.destroy();
 	}
 
-	override public function update():Void {
-		super.update();
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
 
 		worldName.text = stages[Reg.stage].world;
 
@@ -66,8 +66,8 @@ class PlayState extends FlxState
 		moving = true;
 		prevStage.close();
 		prevStage = null;
-		new FlxTimer(
-			0.5, function(_){
+        var timer = new FlxTimer();
+        timer.start(0.5, function(_){
 		    prevStage = null;
 		    moving = false;
 			});

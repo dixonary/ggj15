@@ -42,7 +42,7 @@ class StageView extends FlxSpriteGroup {
         text = new FlxText(0, FlxG.height/6, FlxG.width, 
         	_stage.text, cast FlxG.height/20);
         text.alignment = "center";
-        text.borderStyle = FlxText.BORDER_OUTLINE;
+        text.borderStyle = FlxTextBorderStyle.OUTLINE;
         text.borderSize = 3;
         add(text);
 
@@ -50,7 +50,7 @@ class StageView extends FlxSpriteGroup {
 			_stage.title==""?"":"What do we do now, " + _stage.title, cast FlxG.height/15);
 		whatNow.alignment = "center";
 		whatNow.borderSize = 3;
-        whatNow.borderStyle = FlxText.BORDER_OUTLINE;
+        whatNow.borderStyle = FlxTextBorderStyle.OUTLINE;
 		add(whatNow);
 		choices = [];
 		var ch = stage.choices;
@@ -65,15 +65,16 @@ class StageView extends FlxSpriteGroup {
 		add(stuff);
 
 		//Delay, then bring in new stage
-		new FlxTimer(2, function(_){
+		var timer = new FlxTimer();
+        timer.start(2, function(_){
 			FlxTween.tween(this, {y:0}, 1,
 			{ease:FlxEase.quadInOut});
 			});
 
 	}
 
-	override public function update():Void {
-		super.update();
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
 		bg.x = FlxG.width/2-bg.width/2;
 		bg.y = FlxG.height/2-bg.height/2;
 	}
@@ -81,7 +82,7 @@ class StageView extends FlxSpriteGroup {
 		//Fade out current stage
 		FlxTween.tween(this, {alpha:0}, 0.5,
 		    {ease:FlxEase.quadInOut,
-		    complete:function(_){
+		    onComplete:function(_){
 			    destroy();
 		    }});	
 	}
@@ -112,8 +113,8 @@ class ChoiceButton extends FlxSpriteGroup {
 
 	}
 
-	override public function update():Void {
-		super.update();
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
 
 		var mw = FlxG.mouse.getWorldPosition();
 		if(FlxG.mouse.justPressed) {
